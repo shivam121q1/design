@@ -1,101 +1,136 @@
-import Image from "next/image";
+"use client";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { getAIBrandOutput } from "@/utils/api"; // Import the API function
+
+import Navbar from "@/components/navbar/navbar";
+import HeroSection from "@/components/HeroSection/HeroSection";
+import SelectPlanCard from "@/components/card/card";
+import CrazyForYouPlanCard from "@/components/cardPlan/cardPlan";
+import NetworkCard from "@/components/MainCard/MainCard";
+import { cardData, planData } from "@/data/card";
+
+import img from "./firstImage.jpg";
+import img1 from "./SecondImage.jpg";
+import FeaturesBar from "@/components/Box/Box";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const [brandOutput, setBrandOutput] = useState<any>(null); // Holds entire response
+  const [brandName, setBrandName] = useState<string>(""); // Holds brandName
+  const [inputData, setInputData] = useState<any>(null); // Parsed input data
+  const [outputData, setOutputData] = useState<any>(null); // Parsed output data
+
+  useEffect(() => {
+    if (!id) return; // Avoid running fetch when there is no ID
+    const getBrandData = async () => {
+      try {
+        const data = await getAIBrandOutput(id);
+        console.log("API Data:", data); // Log the API response
+
+        setBrandOutput(data);
+        setOutputData(data?.output ? JSON.parse(data?.output) : {});
+      } catch (err) {
+        console.error("Failed to fetch brand output:", err);
+      }
+    };
+    getBrandData();
+  }, []);
+
+  return (
+    <div className="flex flex-col mx-auto w-11/12 max-w-[1400px]">
+      <Navbar logoUrl={outputData?.logoURL} />
+      <div className="flex flex-col gap-12">
+        <HeroSection
+          tagLine={outputData?.tagline}
+          brandName={brandOutput?.brandName}
+        />
+        <FeaturesBar />
+        {/* Section-1: How it works */}
+        <SectionHowItWorks />
+
+        {/* Section-2: Pricing Plans */}
+        <SectionPricingPlans />
+
+        {/* Section-3: Network Cards */}
+        <SectionNetworkCards />
+
+        {/* Display the parsed brand name and output data */}
+        <div className="mt-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-center">
+            {brandName}
+          </h2>
+          
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
   );
 }
+
+// Section for "How it works"
+const SectionHowItWorks = () => (
+  <div
+    className="flex flex-col justify-center gap-7 mt-10  "
+    style={{
+      backgroundImage:
+        "url(https://s3-alpha-sig.figma.com/img/9cdf/f64d/dafdab4893da00900aaeedb7dbd7c76c?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=aTcwqF1VSlN-5Ll-Dk54LVAXIy~YE2TJWfkDygrUs7OImldUNl8i8KK-s5rtDXLyyLcXIen5YnHx5fVTGmeHNozNNqzKNe-pbUWRFiSKY9KQxyDPY41TNAMdzW3UeWGvRiF~UM-bGNPRhquODP51krtFwj89COfVqAFUHcJiAJCMCbkf-MRgjQ5f-YGG2cIQjLh1PwPybkTrFKhtmH9q3nak9I8Pnbz31j5paQASMo837I0cQkHhF5ccNrH4urhmesf9eDu9j9L5XednTEO4BOREnregkstkSbyDzI5IJPxp1vA2bdZMrS4KNj-p0vc-WyIpaDjP96Z7LtzTeV4o6Q__)",
+    }}
+  >
+    <div className="flex flex-col justify-center gap-7 bg-[#ff0000]/80 py-12">
+
+    <h2 className="text-2xl md:text-3xl text-white font-bold text-center">How it works</h2>
+    <div className="flex flex-wrap justify-center gap-6">
+      {cardData.map((item, index) => (
+        <SelectPlanCard
+        key={index}
+        title={item.heading}
+        text={item.text}
+        icon={item.icon}
+        />
+      ))}
+    </div>
+  </div>
+  </div>
+);
+
+// Section for Pricing Plans
+const SectionPricingPlans = () => (
+  <div className="flex flex-col gap-10">
+    <h2 className="text-2xl md:text-3xl font-bold text-center">
+      One simple price. Many great benefits.
+    </h2>
+    <div className="flex flex-wrap justify-center gap-6">
+      {planData.map((plan, index) => (
+        <CrazyForYouPlanCard
+          key={index}
+          title={plan.title}
+          price={plan.price}
+          duration={plan.duration}
+          description={plan.description}
+          features={plan.features}
+        />
+      ))}
+    </div>
+  </div>
+);
+
+// Section for Network Cards
+const SectionNetworkCards = () => (
+  <div className="flex flex-col gap-10">
+    <NetworkCard
+      title="Bring your own phone"
+      description="Bring your compatible phone to our network for seamless connectivity. Save money, keep your number, and activate your service in just a few simple steps."
+      buttonText="Get Started"
+      imageSrc={img}
+    />
+    <NetworkCard
+      title="America’s best network"
+      description="Experience unmatched coverage and lightning-fast speeds on America’s best network. Stay connected anywhere with reliable service you can trust."
+      buttonText="Check Coverage"
+      imageSrc={img1}
+      classs="flex flex-col md:flex-row-reverse"
+    />
+  </div>
+);
