@@ -12,7 +12,7 @@ export default function SelectPlanCard({ icon: Icon, title, text }: SelectPlanCa
     <div className="flex justify-center items-center">
       <Card className="w-72 p-4 rounded-2xl  h-52 border-0">
         <div className="flex justify-center">
-        <div className="bg-gray-500 border-white p-4 rounded-full">
+        <div className="bg-white/20 border-white p-4 rounded-full">
             {Icon ? <Icon className="w-8 h-8 text-white" /> : null}
           </div>
         </div>

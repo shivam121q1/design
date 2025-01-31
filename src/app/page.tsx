@@ -32,6 +32,9 @@ export default function Home() {
 
         setBrandOutput(data);
         setOutputData(data?.output ? JSON.parse(data?.output) : {});
+
+        const fontColor = data?.output ? JSON.parse(data?.output)?.fontColor : "#000000";
+        document.documentElement.style.setProperty("--primary-color", fontColor);
       } catch (err) {
         console.error("Failed to fetch brand output:", err);
       }
@@ -40,7 +43,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col mx-auto w-11/12 max-w-[1400px]">
+    <div className="flex flex-col ">
       <Navbar logoUrl={outputData?.logoURL} />
       <div className="flex flex-col gap-12">
         <HeroSection
@@ -78,7 +81,7 @@ const SectionHowItWorks = () => (
         "url(https://s3-alpha-sig.figma.com/img/9cdf/f64d/dafdab4893da00900aaeedb7dbd7c76c?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=aTcwqF1VSlN-5Ll-Dk54LVAXIy~YE2TJWfkDygrUs7OImldUNl8i8KK-s5rtDXLyyLcXIen5YnHx5fVTGmeHNozNNqzKNe-pbUWRFiSKY9KQxyDPY41TNAMdzW3UeWGvRiF~UM-bGNPRhquODP51krtFwj89COfVqAFUHcJiAJCMCbkf-MRgjQ5f-YGG2cIQjLh1PwPybkTrFKhtmH9q3nak9I8Pnbz31j5paQASMo837I0cQkHhF5ccNrH4urhmesf9eDu9j9L5XednTEO4BOREnregkstkSbyDzI5IJPxp1vA2bdZMrS4KNj-p0vc-WyIpaDjP96Z7LtzTeV4o6Q__)",
     }}
   >
-    <div className="flex flex-col justify-center gap-7 bg-[#ff0000]/80 py-12">
+    <div className="flex flex-col justify-center items-center gap-7 bg-primary opacity-80 py-12">
 
     <h2 className="text-2xl md:text-3xl text-white font-bold text-center">How it works</h2>
     <div className="flex flex-wrap justify-center gap-6">
@@ -130,7 +133,7 @@ const SectionNetworkCards = () => (
       description="Experience unmatched coverage and lightning-fast speeds on America’s best network. Stay connected anywhere with reliable service you can trust."
       buttonText="Check Coverage"
       imageSrc={img1}
-      classs="flex flex-col md:flex-row-reverse"
+      classs="flex flex-col md:flex-row-reverse ml-10"
     />
   </div>
 );

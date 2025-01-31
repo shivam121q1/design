@@ -4,13 +4,17 @@
 
 
 
+/* styles/globals.css */
 :root {
-  --font-family: "Inter", sans-serif; /* Default */
-  --primary-color: #1d4ed8; /* Default Blue */
-  --secondary-color: #f97316; /* Default Orange */
-  --tertiary-color: #10b981; /* Default Green */
+  --primary-color: #3490dc; /* Set a fallback default color */
 }
 
-body {
-  font-family: var(--font-family);
+@layer base {
+  .text-primary {
+    color: var(--primary-color);
+  }
+
+  .bg-primary {
+    background-color: var(--primary-color);
+  }
 }

@@ -13,7 +13,7 @@ interface CrazyForYouPlanCardProps {
 export default function CrazyForYouPlanCard({ title, price, duration, description, features }: CrazyForYouPlanCardProps) {
   return (
     <div className="flex justify-center items-center ">
-      <Card className="w-72 p-4 rounded-2xl shadow-md h-96">
+      <Card className="w-72 p-4 rounded-2xl shadow-md h-[430px]">
         <CardHeader className="text-center">
           <CardTitle className="text-lg font-bold">{title}</CardTitle>
         </CardHeader>

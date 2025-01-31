@@ -12,13 +12,13 @@ export default function Navbar({title,logoUrl}:NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="p-4 border-b-2 border-blue-500">
+    <nav className="p-4 mx-10">
       <div className="flex justify-between items-center">
         {/* Brand */}
         <div className="flex gap-2 items-center">
           {logoUrl && <Image
             height={40}
-            width={40}
+            width={70}
             src={logoUrl}
             alt="logo"
           />}

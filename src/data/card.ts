@@ -9,10 +9,9 @@ export const cardData = [
 ]
 
 
-
 export const planData = [
   {
-    title: "Crazy for You",
+    title: "Beginner",
     price: "$20.00",
     duration: "/mo",
     description: "(Plus taxes and fees)",
@@ -22,7 +21,7 @@ export const planData = [
     ],
   },
   {
-    title: "Cry Your Heart Out",
+    title: "Trendsetter",
     price: "$35.00",
     duration: "/mo",
     description: "(Plus taxes and fees)",
@@ -32,7 +31,7 @@ export const planData = [
     ],
   },
   {
-    title: "Daydreamer",
+    title: "Creator Pro",
     price: "$45.00",
     duration: "/mo",
     description: "(Plus taxes and fees)",
@@ -44,7 +43,7 @@ export const planData = [
     ],
   },
   {
-    title: "Million Years Ago",
+    title: "Masterpiece",
     price: "$50.00",
     duration: "/mo",
     description: "(Plus taxes and fees)",
@@ -56,3 +55,4 @@ export const planData = [
     ],
   },
 ];
+
