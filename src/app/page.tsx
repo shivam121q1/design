@@ -12,8 +12,8 @@ import { cardData, planData } from "@/data/card";
 import FeaturesBar from "@/components/Box/Box";
 import SearchParamsHandler from "@/components/SearchParamsHandler"; // Import new Client Component
 
-import img from "./firstImage.jpg";
-import img1 from "./SecondImage.jpg";
+import img from "./image1.jpg";
+import img1 from "./image2.jpg";
 
 export default function Home() {
   const [id, setId] = useState<string | null>(null);
@@ -102,7 +102,7 @@ const SectionPricingPlans = () => (
 
 // Section for Network Cards
 const SectionNetworkCards = () => (
-  <div className="flex flex-col gap-10">
+  <div className="flex flex-col gap-10 mx-auto max-w-maxContent w-11/12">
     <NetworkCard
       title="Bring your own phone"
       description="Bring your compatible phone to our network for seamless connectivity. Save money, keep your number, and activate your service in just a few simple steps."
