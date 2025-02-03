@@ -14,6 +14,7 @@ import SearchParamsHandler from "@/components/SearchParamsHandler"; // Import ne
 
 import img from "./image1.jpg";
 import img1 from "./image2.jpg";
+import AboutUs from "@/components/AboutUs/Aboutus";
 
 export default function Home() {
   const [id, setId] = useState<string | null>(null);
@@ -52,6 +53,7 @@ export default function Home() {
       <Navbar logoUrl={outputData?.logoURL} />
       <div className="flex flex-col gap-12">
         <HeroSection tagLine={outputData?.tagline} brandName={brandName} />
+        <AboutUs  Tagline={outputData?.tagline} description={outputData?.description} />
         <FeaturesBar />
 
         <SectionHowItWorks />
