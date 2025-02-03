@@ -60,7 +60,7 @@ export default function Home() {
         <SectionPricingPlans />
         <SectionNetworkCards />
 
-        <div className="mt-10 flex space-x-6 justify-center items-center pb-4">
+        <div className="mt-10  flex space-x-6 justify-center items-center pb-4">
           <h2 className="text-xl md:text-xl font-bold text-center text-primary">{brandName}</h2>
           {outputData?.contactInfoEmail && <div className="flex items-center space-x-4"><div className="w-1 h-5 border bg-primary"> </div> <h2 className="text-xl md:text-xl font-bold text-primary">{outputData?.contactInfoEmail}</h2></div>}
           {outputData?.contactInfoPhone && <div className="flex items-center space-x-4"><div className="w-1 h-5 border bg-primary" > </div> <h2 className="text-xl md:text-xl font-bold text-primary">{outputData?.contactInfoPhone}</h2></div>}
