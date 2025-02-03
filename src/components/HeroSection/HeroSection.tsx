@@ -21,9 +21,7 @@ export default function HeroSection({tagLine,brandName}:HeroSectionProps) {
               {formatText(tagLine)}
             </h3>
           )}
-        <p className="text-lg sm:text-base md:text-xl mb-6">
-          The way mobile service should be.
-        </p>
+        
         <Button className="bg-white text-black px-6 py-3 sm:px-4 sm:py-2 font-semibold rounded-lg hover:bg-gray-200 mb-10">
           Get Started
         </Button>
