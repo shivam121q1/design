@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import FeaturesBar from "../Box/Box";
+import { formatText } from "@/utils/function";
 interface HeroSectionProps{
   tagLine:string,
   brandName:string
@@ -15,9 +16,11 @@ export default function HeroSection({tagLine,brandName}:HeroSectionProps) {
     ><div className="absolute inset-0 bg-primary opacity-20"></div>
       <div className="absolute inset-0 flex flex-col justify-end gap-2 items-center text-white text-center px-6 sm:px-4">
         <h1 className="text-4xl text-white font-bold">{brandName}</h1>
-        <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4">
-          {tagLine}
-        </h3>
+        {tagLine && ( // Render only if tagLine exists
+            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold">
+              {formatText(tagLine)}
+            </h3>
+          )}
         <p className="text-lg sm:text-base md:text-xl mb-6">
           The way mobile service should be.
         </p>
